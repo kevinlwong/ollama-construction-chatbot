@@ -1,4 +1,3 @@
-
 <template>
     <div class="chat-container">
       <div class="chat-header">Chat with {{ model }}</div>
@@ -229,3 +228,4 @@
     cursor: pointer;
   }
   </style>
+  

@@ -1,6 +1,8 @@
 <template>
-  <div class="app-container">
+  <div>
     <h1>Ollama Multi-Model Chatbot</h1>
+
+    <Sidebar />
 
     <!-- Tab Navigation -->
     <div class="tabs">
@@ -21,9 +23,10 @@
 
 <script>
 import Chatbot from './components/Chatbot.vue';
+import Sidebar from './components/sidebar/Sidebar.vue';
 
 export default {
-  components: { Chatbot },
+  components: { Chatbot, Sidebar },
   data() {
     return {
       activeTab: 'Precon', // Default to Precon
@@ -45,11 +48,16 @@ export default {
 </script>
 
 <style>
-.app-container {
-  text-align: center;
-  background-color: #1e1e1e;
-  color: white;
-  padding: 20px;
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #FFFFFF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .tabs {
