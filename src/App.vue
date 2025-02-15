@@ -2,7 +2,11 @@
   <div>
     <h1>Ollama Multi-Model Chatbot</h1>
 
+    <!--Sidebar-->
     <Sidebar />
+    
+    <!--Model Selection-->
+    <ModelSelection />
 
     <!-- Tab Navigation -->
     <div class="tabs">
@@ -24,9 +28,10 @@
 <script>
 import Chatbot from './components/Chatbot.vue';
 import Sidebar from './components/sidebar/Sidebar.vue';
+import ModelSelection from './components/model-selection/ModelSelection.vue';
 
 export default {
-  components: { Chatbot, Sidebar },
+  components: { Chatbot, Sidebar, ModelSelection },
   data() {
     return {
       activeTab: 'Precon', // Default to Precon

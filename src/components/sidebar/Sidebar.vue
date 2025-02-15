@@ -1,10 +1,10 @@
 <script>
-import { collapsed, toggleSidebar, sidebarWidth } from './state.js'
+import { sidebarCollapsed, toggleSidebar, sidebarWidth } from './sidebar-state.js'
 
 export default {
     props: {},
     setup() {
-        return { collapsed, toggleSidebar, sidebarWidth };
+        return { sidebarCollapsed, toggleSidebar, sidebarWidth };
     }
 }
 </script>
@@ -13,6 +13,12 @@ export default {
     <div class="sidebar" :style="{ width: sidebarWidth }">
         <span class="hamburger-icon" @click="toggleSidebar">
             <i class="fa-solid fa-bars"></i>
+        </span>
+        <span class="settings-icon">
+            <i class="fa-solid fa-gear"></i>
+        </span>
+        <span class="plus-icon">
+            <i class="fa-solid fa-circle-plus"></i>
         </span>
     </div>
 
@@ -46,6 +52,24 @@ export default {
 .hamburger-icon {
     position: absolute;
     top: 5px;
+    left: 15px;
+    padding: 0.75em;
+    
+    color: #21262F;
+}
+
+.settings-icon {
+    position: absolute;
+    bottom: 5px;
+    left: 15px;
+    padding: 0.75em;
+    
+    color: #21262F;
+}
+
+.plus-icon {
+    position: absolute;
+    top: 50px;
     left: 15px;
     padding: 0.75em;
     
