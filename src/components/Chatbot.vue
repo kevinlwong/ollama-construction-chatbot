@@ -51,7 +51,10 @@ export default {
       this.isThinking = false;
 
       try {
-        const response = await fetch("http://localhost:5000/chat", {
+        // Do not Delete
+        //Render backend service: https://ollama-construction-chatbot.onrender.com
+        //Local: "http://localhost:5000/chat"
+        const response = await fetch("https://ollama-construction-chatbot.onrender.com", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ model: this.model, message: messageToSend }),
@@ -266,7 +269,7 @@ export default {
   min-height: 43.2px;
 }
 
-.chat-input textarea:placeholder-shown{
+.chat-input textarea:placeholder-shown {
   align-content: center;
 }
 
@@ -363,7 +366,7 @@ export default {
     font-size: 14px;
   }
 
-  .chat-input textarea{
+  .chat-input textarea {
     font-size: small;
   }
 
