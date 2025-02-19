@@ -1,7 +1,7 @@
 <template>
   <div class="chat-container">
     <div class="chat-header">Chat with {{ model }}</div>
-
+    <div class="chat-header">How can I help?</div>
     <!-- Chat Messages (Including Thinking Process) -->
     <div class="chat-messages">
       <div v-for="(msg, index) in messages" :key="index" :class="msg.sender">
@@ -135,19 +135,20 @@ export default {
 
 <style>
 .chat-container {
-  width: 500px;
+  width: 1200px;
   margin: auto;
   background: #2e2e2e;
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  /* box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); */
 }
 
 .chat-header {
-  background: #007bff;
+  background: white;
   padding: 10px;
-  color: white;
-  font-size: 18px;
+  color: #646464;
+  font-size: 30px;
+  font-family: Inter;
   text-align: center;
 }
 
@@ -164,12 +165,12 @@ export default {
 
 .user {
   text-align: right;
-  color: lightblue;
+  color: rgb(255, 255, 255);
 }
 
 .bot {
   text-align: left;
-  color: lightgreen;
+  color: rgb(101, 41, 149);
 }
 
 .message-text {
@@ -189,7 +190,7 @@ export default {
 }
 
 .thinking-text {
-  color: #ffc107;
+  color: #87afff;
   font-style: italic;
   white-space: pre-line;
   word-wrap: break-word;
@@ -217,23 +218,24 @@ export default {
 .chat-input {
   display: flex;
   padding: 10px;
-  background: #333;
+  background: #fff;
 }
 
 .chat-input input {
   flex-grow: 1;
   padding: 10px;
-  border: none;
-  background: #444;
-  color: white;
-  border-radius: 5px;
+  border-width: 1px;
+  border-color: #646464;
+  background: #fff;
+  color: #646464;
+  border-radius: 100px;
 }
 
 .chat-input button {
   padding: 10px 15px;
   margin-left: 10px;
-  background: #007bff;
-  color: white;
+  background: #fff;
+  color: #646464;
   border: none;
   cursor: pointer;
 }
