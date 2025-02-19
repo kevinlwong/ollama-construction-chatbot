@@ -10,7 +10,6 @@ import {
 } from "./modelselect-state.js";
 
 export default {
-  props: {},
   setup() {
     return {
       selectedModel,

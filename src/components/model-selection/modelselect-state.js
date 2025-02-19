@@ -15,6 +15,7 @@ export const selectedStage = computed(() => {
 export const modelSelectCollapsed = ref(true);
 export const toggleDropdown = () => (modelSelectCollapsed.value = !modelSelectCollapsed.value);
 export const selectModel = (model) => {
+    console.log(`Switching model to : ${model}`);
     selectedModel.value = model;
     modelSelectCollapsed.value = true;
 };

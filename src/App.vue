@@ -4,62 +4,38 @@
 
     <!--Sidebar-->
     <Sidebar />
-    
+
     <!--Model Selection-->
     <ModelSelection />
 
-    <!-- Tab Navigation -->
-    <div class="tabs">
-      <button
-        v-for="(tab, index) in tabs"
-        :key="index"
-        :class="{ active: activeTab === tab.name }"
-        @click="setActiveTab(tab.name, tab.model)"
-      >
-        {{ tab.name }}
-      </button>
-    </div>
-
     <!-- Chatbot Component (Pass the Active Model) -->
-    <Chatbot :model="activeModel" />
+    <Chatbot :model="selectedModel" />
   </div>
 </template>
 
 <script>
-import Chatbot from './components/Chatbot.vue';
-import Sidebar from './components/sidebar/Sidebar.vue';
-import ModelSelection from './components/model-selection/ModelSelection.vue';
+import Chatbot from "./components/Chatbot.vue";
+import Sidebar from "./components/sidebar/Sidebar.vue";
+import ModelSelection from "./components/model-selection/ModelSelection.vue";
+import { selectedModel } from "./components/model-selection/modelselect-state.js";
 
 export default {
   components: { Chatbot, Sidebar, ModelSelection },
-  data() {
-    return {
-      activeTab: 'Precon', // Default to Precon
-      activeModel: 'deepseek-r1:7b', // Default model for Precon
-      tabs: [
-        { name: 'Precon', model: 'deepseek-r1:7b' },
-        { name: 'Con', model: 'qwen2.5:7b' },
-        { name: 'Postcon', model: 'deepseek-r1:7b' }
-      ]
-    };
+  setup() {
+    return { selectedModel };
   },
-  methods: {
-    setActiveTab(tabName, model) {
-      this.activeTab = tabName;
-      this.activeModel = model;
-    }
-  }
 };
 </script>
 
 <style>
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   display: flex;
   justify-content: center;
   align-items: center;
