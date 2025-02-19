@@ -8,9 +8,22 @@ import {
   selectModel,
   dropdownPosition,
 } from "./modelselect-state.js";
+import {
+  ref,
+  computed
+} from 'vue';
 
 export default {
   setup() {
+
+    const groupedModels = computed(() => {
+      return models.reduce((acc, model) => {
+        if (!acc[model.stage]) acc[model.stage] = [];
+        acc[model.stage].push(model);
+        return acc;
+      }, {});
+    });
+
     return {
       selectedModel,
       selectedStage,
@@ -19,6 +32,7 @@ export default {
       toggleDropdown,
       selectModel,
       dropdownPosition,
+      groupedModels
     };
   },
 };
@@ -38,6 +52,21 @@ export default {
 
     <!-- Dropdown Menu -->
     <div v-if="!modelSelectCollapsed" class="dropdown-menu">
+      <div v-for="(stage, stageName) in groupedModels" :key="stageName">
+        <div class="dropdown-stage">{{ stageName }}</div>
+        <div 
+          v-for="model in stage" 
+          :key="model.model" 
+          @click="selectModel(model.model)" 
+          class="dropdown-item" 
+          :class="{ active: model.model === selectedModel }"
+        >
+          {{ model.model }}
+        </div>
+      </div>
+      </div>
+      <!-- old code for dropdown menu -->
+    <!-- <div v-if="!modelSelectCollapsed" class="dropdown-menu">
       <div
         v-for="(item, index) in models"
         :key="index"
@@ -46,9 +75,10 @@ export default {
       >
         {{ item.model }}
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
+
 
 <style>
 :root {
@@ -57,6 +87,7 @@ export default {
 </style>
 
 <style scoped>
+
 /* Dropdown Container */
 .dropdown-container {
   position: absolute;
@@ -66,6 +97,16 @@ export default {
   transition: 0.3s ease;
 }
 /* End Dropdown Container */
+
+.dropdown-stage{
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 1px;
+  margin-bottom: 1px;
+  color: #646464;
+  text-align: left;
+  padding-left: 5px;
+}
 
 /* Dropdown Button */
 .dropdown-button {
@@ -96,7 +137,7 @@ export default {
 }
 
 .model-name {
-  font-size: 16px;
+  font-size: 18px;
   color: #646464;
 }
 
@@ -121,15 +162,18 @@ export default {
 }
 
 .dropdown-item {
-  padding: 10px 15px;
+  padding-left: 12px;
   cursor: pointer;
-  font-size: 14px;
-  color: black;
+  border-radius: 6px;
+  transition: background 0.2s;
+  font-size: 16px;
+  color: #646464;
   text-align: left;
 }
 
 .dropdown-item:hover {
-  background-color: rgba(0, 0, 0, 0.1);
+  /* background-color: rgba(0, 0, 0, 0.1); */
+  background: #a8d0e6;
 }
 /* End Dropdown menu */
 </style>

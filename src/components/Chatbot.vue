@@ -1,6 +1,6 @@
 <template>
   <div class="chat-container">
-    <div class="chat-header">Chat with {{ model }}</div>
+    <!-- <div class="chat-header">Chat with {{ model }}</div> -->
     <div class="chat-header">How can I help?</div>
     <!-- Chat Messages (Including Thinking Process) -->
     <div class="chat-messages">
@@ -21,14 +21,12 @@
 
     <!-- Chat Input Box -->
     <div class="chat-input">
-      <input
-        v-model="userInput"
-        placeholder="Type a message..."
-        @keyup.enter="sendMessage"
-      />
+      <textarea v-model="userInput" placeholder="Ask WeekendAI" @keyup.enter="sendMessage"
+        @keydown.enter.prevent="sendMessage"></textarea>
       <button @click="sendMessage">Send</button>
     </div>
   </div>
+
 </template>
 
 <script>
@@ -45,14 +43,18 @@ export default {
     async sendMessage() {
       if (!this.userInput.trim()) return;
 
-      this.messages.push({ sender: "user", text: this.userInput });
+      const messageToSend = this.userInput;
+      console.log(messageToSend)
+      this.userInput = "";
+      this.messages.push({ sender: "user", text: messageToSend });
+
       this.isThinking = false;
 
       try {
         const response = await fetch("http://localhost:5000/chat", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ model: this.model, message: this.userInput }),
+          body: JSON.stringify({ model: this.model, message: messageToSend }),
         });
 
         const reader = response.body.getReader();
@@ -95,8 +97,8 @@ export default {
         });
       }
 
-      this.userInput = "";
     },
+
     addThinkingToChat(text) {
       this.messages.push({
         sender: "bot",
@@ -137,8 +139,11 @@ export default {
 .chat-container {
   width: 1200px;
   margin: auto;
-  background: #2e2e2e;
-  border-radius: 10px;
+  max-width: 1200px;
+  min-width: 320px;
+  background: #fff;
+  /* flex-direction: column; */
+  /* border-radius: 10px; */
   overflow: hidden;
   /* box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); */
 }
@@ -147,17 +152,17 @@ export default {
   background: white;
   padding: 10px;
   color: #646464;
-  font-size: 30px;
+  font-size: 40px;
   font-family: Inter;
   text-align: center;
 }
 
 /* Chat Messages */
 .chat-messages {
-  height: 300px;
+  height: 400px;
   overflow-y: auto;
   padding: 10px;
-  background: #1e1e1e;
+  background: #fff;
   color: white;
   border-radius: 5px;
   margin: 10px;
@@ -165,7 +170,7 @@ export default {
 
 .user {
   text-align: right;
-  color: rgb(255, 255, 255);
+  color: #646464;
 }
 
 .bot {
@@ -177,16 +182,18 @@ export default {
   display: inline-block;
   padding: 8px 12px;
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.1);
+  background: #C5E0F3;
   margin: 5px;
 }
 
 /* Thinking Message Styling */
 .thinking-message {
-  background: #333;
+  background: #fff;
   padding: 10px;
   margin: 10px 0;
   border-radius: 5px;
+  color: #646464;
+  width: fit-content;
 }
 
 .thinking-text {
@@ -201,42 +208,199 @@ export default {
 
 /*  Toggle Button */
 .toggle-thinking {
-  background: #444;
-  color: white;
+  background: #fff;
+  color: #646464;
   border: none;
   padding: 5px 10px;
   cursor: pointer;
   font-size: 12px;
-  border-radius: 5px;
+  border-radius: 8px;
   margin-bottom: 5px;
+  outline: none;
+  transition: all 0.3s ease-in-out;
 }
 
 .toggle-thinking:hover {
-  background: #007bff;
+  background: #646464;
+  color: #fff;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.5);
+  /* Stronger shadow */
+  border: none;
+}
+
+.toggle-thinking:active {
+  transform: scale(0.95);
+}
+
+.toggle-thinking:focus {
+  outline: none;
 }
 
 .chat-input {
   display: flex;
   padding: 10px;
   background: #fff;
+  outline: none;
+  align-items: center;
+  gap: 10px;
 }
 
-.chat-input input {
+.chat-input textarea {
   flex-grow: 1;
+  /* min-width: 200px; */
+  /* max-width: 100%; */
+  text-align: left;
   padding: 10px;
-  border-width: 1px;
-  border-color: #646464;
+  border: 1px solid #646464;
   background: #fff;
   color: #646464;
-  border-radius: 100px;
+  border-radius: 45px;
+  outline: none;
+  font-family: Inter;
+  font-size: large;
+  /* overflow-wrap: break-word; */
+  align-content: baseline;
+  resize: vertical;
+  max-height: 150px;
+  min-height: 43.2px;
+}
+
+.chat-input textarea:placeholder-shown{
+  align-content: center;
 }
 
 .chat-input button {
-  padding: 10px 15px;
+  width: 80px;
+  height: 64.8px;
+  padding: 12px 20px;
   margin-left: 10px;
   background: #fff;
   color: #646464;
-  border: none;
+  border: 1px solid #646464;
+  border-radius: 50px;
   cursor: pointer;
+  outline: none;
+  transition: all 0.3s ease-in-out;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.chat-input button:hover {
+  background: #646464;
+  color: #fff;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.5);
+
+}
+
+/* Responsive Design */
+@media (max-width: 1320px) {
+  .chat-container {
+    width: 900px;
+  }
+
+  .chat-header {
+    font-size: 36px;
+  }
+
+  .chat-messages {
+    height: 500px;
+  }
+
+  .chat-input input {
+    padding: 10px;
+  }
+
+  .chat-input button {
+    padding: 10px 15px;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .chat-container {
+    width: 650px;
+  }
+
+  .chat-header {
+    font-size: 30px;
+  }
+
+  .chat-messages {
+    height: 450px;
+  }
+
+  .chat-input textarea {
+    padding: 10px;
+    font-size: medium;
+  }
+
+  .chat-input button {
+    padding: 10px 15px;
+    font-size: medium;
+  }
+}
+
+@media (max-width: 768px) {
+  .chat-container {
+    width: 350px;
+  }
+
+  .chat-header {
+    font-size: 22px;
+    padding: 15px;
+  }
+
+  .chat-messages {
+    height: 300px;
+    font-size: small;
+  }
+
+  .chat-input input {
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  .chat-input textarea{
+    font-size: small;
+  }
+
+  .chat-input button {
+    padding: 8px 12px;
+    font-size: small;
+  }
+}
+
+@media (max-width: 480px) {
+  .chat-container {
+    width: 100%;
+    border-radius: 0;
+  }
+
+  .chat-header {
+    font-size: 20px;
+  }
+
+  .chat-messages {
+    height: 180px;
+    padding: 5px;
+  }
+
+  .chat-input {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .chat-input input {
+    width: 100%;
+    padding: 8px;
+  }
+
+  .chat-input button {
+    width: 100%;
+    padding: 8px;
+  }
 }
 </style>
