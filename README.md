@@ -65,9 +65,9 @@ ollama serve
 ---
 
 ## **Upcoming Enhancements**
-🚀 **Training Custom AI Models** – Using real-world construction data for **fine-tuned AI responses**.  
-🚀 **Cloud Integration** – Expanding capabilities for **remote data storage and analysis**.  
-🚀 **Advanced Risk Prediction** – AI-powered insights for **budgeting, safety risks, and resource allocation**.  
+ **Training Custom AI Models** – Using real-world construction data for **fine-tuned AI responses**.  
+ **Cloud Integration** – Expanding capabilities for **remote data storage and analysis**.  
+ **Advanced Risk Prediction** – AI-powered insights for **budgeting, safety risks, and resource allocation**.  
 
 ---
 
