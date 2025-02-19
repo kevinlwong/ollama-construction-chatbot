@@ -2,7 +2,7 @@
   <div class="chat-container">
     <div class="chat-header">Chat with {{ model }}</div>
 
-    <!-- ✅ Chat Messages (Including Thinking Process) -->
+    <!-- Chat Messages (Including Thinking Process) -->
     <div class="chat-messages">
       <div v-for="(msg, index) in messages" :key="index" :class="msg.sender">
         <template v-if="msg.type === 'thinking'">
@@ -151,7 +151,7 @@ export default {
   text-align: center;
 }
 
-/* ✅ Chat Messages */
+/* Chat Messages */
 .chat-messages {
   height: 300px;
   overflow-y: auto;
@@ -180,7 +180,7 @@ export default {
   margin: 5px;
 }
 
-/* ✅ Thinking Message Styling */
+/* Thinking Message Styling */
 .thinking-message {
   background: #333;
   padding: 10px;
@@ -198,7 +198,7 @@ export default {
   overflow-y: auto;
 }
 
-/* ✅ Toggle Button */
+/*  Toggle Button */
 .toggle-thinking {
   background: #444;
   color: white;

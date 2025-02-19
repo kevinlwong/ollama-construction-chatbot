@@ -97,6 +97,7 @@ export default {
 
 .model-name {
   font-size: 16px;
+  color: #646464;
 }
 
 .model-stage {
