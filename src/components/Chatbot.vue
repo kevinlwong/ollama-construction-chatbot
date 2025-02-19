@@ -54,7 +54,7 @@ export default {
         // Do not Delete
         //Render backend service: https://ollama-construction-chatbot.onrender.com
         //Local: "http://localhost:5000/chat"
-        const response = await fetch("https://ollama-construction-chatbot.onrender.com", {
+        const response = await fetch("https://ollama-construction-chatbot.onrender.com/chat", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ model: this.model, message: messageToSend }),
