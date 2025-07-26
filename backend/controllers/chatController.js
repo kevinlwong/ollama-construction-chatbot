@@ -14,10 +14,10 @@ export const handleChat = async (req, res) => {
 
     try {
         await streamChatResponse(model, message, res);
-        res.status(201).json({
-            success: true,
-            message: "Received successful response from Ollama."
-        })
+        // res.status(201).json({
+        //     success: true,
+        //     message: "Received successful response from Ollama."
+        // })
     } catch (error) {
         console.error("Error connecting to Ollama:", error.response ? error.response.data : error.message);
         res.status(500).json({

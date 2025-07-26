@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000/chat';
+const API_URL = 'http://localhost:5000/api/chat';
 
 export const sendMessageToOllama = async (model, message) => {
     try {

@@ -24,7 +24,7 @@ export const handleUpload = async (req, res) => {
         console.error('Upload/OCR Error:', error);
         res.status(500).json({
             success: false,
-            error: "Failed to process te uploaded file."
+            error: "Failed to process the uploaded file."
         });
     }
 };

@@ -2,13 +2,13 @@ import axios from 'axios';
 
 const OLLAMA_URL = 'http://localhost:11434/api/generate';
 
-export const streamChatResponse = async (module, prompt, res) => {
+export const streamChatResponse = async (model, prompt, res) => {
     const response = await axios.post(OLLAMA_URL,  { model, prompt }, { responseType: 'stream' });
 
     res.setHeader('Content-Type', 'application/json');
     res.setHeader('Transfer-Encoding', 'chunked');
 
-    let fullReponse = '';
+    let fullResponse = '';
     let thinkingProcess = '';
     let isThinking = false;
     let hasThinking = false;
@@ -18,7 +18,7 @@ export const streamChatResponse = async (module, prompt, res) => {
             const parsedChunk = JSON.parse(chunk.toString());
 
             if(parsedChunk.response) {
-                fullReponse += parsedChunk.response;
+                fullResponse += parsedChunk.response;
 
                 if(parsedChunk.response.includes("<think>")) {
                     isThinking = true;
