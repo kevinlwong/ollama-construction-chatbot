@@ -19,6 +19,7 @@ export const handleUpload = async (req, res) => {
         fs.unlink(filePath, () => {});
 
         const fullPrompt = `${extractedText}\n\nUser Prompt: ${userPrompt}`;
+        console.log(extractedText)
         await streamChatResponse(model, fullPrompt, res);
     } catch (error) {
         console.error('Upload/OCR Error:', error);
